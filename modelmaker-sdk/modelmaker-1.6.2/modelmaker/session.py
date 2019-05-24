@@ -74,7 +74,7 @@ class Session(object):
 		else:
 			raise ValueError("username/password must be set in session(username=xxx,password=xxx) or in config file")
 
-		self.s3_protocol = "https"
+		self.s3_protocol = "http"
 		self.verify_ssl = True
 		self.region = "js01"
 		self.host_base = "https://mmr.wangsucloud.com:9948/mmr"
@@ -153,7 +153,7 @@ class Session(object):
 						raise Exception("Get ak/sk failed! ", e)
 				self.access_key, self.secret_key, self.s3_endpoint_url, self.s3_region, self.s3_mirror_auth, self.s3_mirror_endpoint_url = res
 
-				LOGGER.debug({'response':{'url':self.s3_endpoint_url,'ak':self.access_key,'sk':self.secret_key,'region':self.s3_region}})
+				LOGGER.info({'response':{'url':self.s3_endpoint_url,'ak':self.access_key,'sk':self.secret_key,'region':self.s3_region}})
 				
 				self.s3_client = WCS(endpoint_url=self.s3_endpoint_url, ak=self.access_key, sk=self.secret_key, region=self.s3_region, method=self.s3_protocol)
 				self.client = create_client(context="default", access_key=self.access_key, secret_key=self.secret_key, \
